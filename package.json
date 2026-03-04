@@ -5,6 +5,10 @@
 	"type": "module",
 	"license": "MIT",
 	"author": "Franz Schlögel",
+	"homepage": "https://github.com/franzs/use-magnetic#readme",
+	"bugs": {
+		"url": "https://github.com/franzs/use-magnetic/issues"
+	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/franzs/use-magnetic"
@@ -23,11 +27,17 @@
 	],
 	"exports": {
 		".": {
-			"types": "./dist/index.d.ts",
-			"import": "./dist/index.js",
-			"require": "./dist/index.cjs"
+			"import": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
+			},
+			"require": {
+				"types": "./dist/index.d.cts",
+				"default": "./dist/index.cjs"
+			}
 		}
 	},
+	"sideEffects": false,
 	"main": "./dist/index.cjs",
 	"module": "./dist/index.js",
 	"types": "./dist/index.d.ts",
@@ -52,5 +62,8 @@
 	},
 	"peerDependencies": {
 		"react": ">=19.0.0"
+	},
+	"engines": {
+		"node": ">=18"
 	}
 }

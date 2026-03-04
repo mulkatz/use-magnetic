@@ -10,9 +10,28 @@ function lerp(start: number, end: number, factor: number): number {
 	return start + (end - start) * factor;
 }
 
-function getPrefersReducedMotion(): boolean {
-	if (typeof window === "undefined") return false;
-	return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function getReducedMotionQuery(): MediaQueryList | null {
+	if (typeof window === "undefined") return null;
+	return window.matchMedia("(prefers-reduced-motion: reduce)");
+}
+
+function usePrefersReducedMotion(): boolean {
+	const [prefersReduced, setPrefersReduced] = useState(() => {
+		return getReducedMotionQuery()?.matches ?? false;
+	});
+
+	useEffect(() => {
+		const mql = getReducedMotionQuery();
+		if (!mql) return;
+
+		const handler = (e: MediaQueryListEvent) => setPrefersReduced(e.matches);
+		mql.addEventListener("change", handler);
+		// Sync in case it changed between render and effect
+		setPrefersReduced(mql.matches);
+		return () => mql.removeEventListener("change", handler);
+	}, []);
+
+	return prefersReduced;
 }
 
 export function useMagnetic(
@@ -29,6 +48,9 @@ export function useMagnetic(
 		onEnter,
 		onLeave,
 	} = options;
+
+	const prefersReducedMotion = usePrefersReducedMotion();
+	const motionDisabled = respectMotionPreference && prefersReducedMotion;
 
 	const [isActiveState, setIsActiveState] = useState(false);
 
@@ -85,7 +107,7 @@ export function useMagnetic(
 		const el = ref.current;
 		if (!el) return;
 
-		if (respectMotionPreference && getPrefersReducedMotion()) return;
+		if (motionDisabled) return;
 
 		const triggerEl = triggerArea === "parent" ? (el.parentElement ?? el) : el;
 
@@ -152,7 +174,7 @@ export function useMagnetic(
 				el.style.transform = "";
 			}
 		};
-	}, [ref, respectMotionPreference, triggerArea, startAnimation]);
+	}, [ref, motionDisabled, triggerArea, startAnimation]);
 
 	return {
 		isActive: isActiveState,

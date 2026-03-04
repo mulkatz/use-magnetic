@@ -1,5 +1,5 @@
 {
-	"name": "magnetic-elements",
+	"name": "use-magnetic",
 	"version": "0.0.1",
 	"description": "React hook & components for magnetic hover interactions. Zero dependencies, SSR-safe, a11y-first.",
 	"type": "module",
@@ -7,7 +7,7 @@
 	"author": "Franz Schlögel",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/franzs/magnetic-elements"
+		"url": "https://github.com/franzs/use-magnetic"
 	},
 	"keywords": [
 		"magnetic",

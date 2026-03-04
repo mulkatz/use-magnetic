@@ -1,4 +1,4 @@
-# magnetic-elements
+# use-magnetic
 
 React hook & components for magnetic hover interactions. Elements that attract toward the cursor — like on Apple.com and Awwwards sites.
 
@@ -16,7 +16,7 @@ React hook & components for magnetic hover interactions. Elements that attract t
 ## Install
 
 ```bash
-npm install magnetic-elements
+npm install use-magnetic
 ```
 
 ## Quick Start
@@ -24,7 +24,7 @@ npm install magnetic-elements
 ### Hook
 
 ```tsx
-import { useMagnetic } from 'magnetic-elements';
+import { useMagnetic } from 'use-magnetic';
 import { useRef } from 'react';
 
 function MagneticButton() {
@@ -42,7 +42,7 @@ function MagneticButton() {
 ### Component
 
 ```tsx
-import { Magnetic } from 'magnetic-elements';
+import { Magnetic } from 'use-magnetic';
 
 function App() {
   return (
@@ -72,18 +72,17 @@ function App() {
 
 ### `<Magnetic>`
 
-Accepts all hook options as props, plus:
+Accepts all hook options as props, plus all HTML attributes for the rendered element:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `as` | `keyof HTMLElementTagNameMap` | `'div'` | HTML tag to render |
-| `className` | `string` | — | CSS class |
-| `style` | `CSSProperties` | — | Inline styles |
+| `as` | `ElementType` | `'div'` | HTML tag to render |
 | `children` | `ReactNode` | — | Content |
+| `...htmlProps` | — | — | All standard HTML attributes (`onClick`, `className`, `aria-*`, `data-*`, etc.) |
 
 ## Accessibility
 
-By default, `magnetic-elements` disables the effect when the user has `prefers-reduced-motion: reduce` enabled. This respects users with vestibular motion disorders. You can override this with `respectMotionPreference={false}`.
+By default, `use-magnetic` disables the effect when the user has `prefers-reduced-motion: reduce` enabled. This respects users with vestibular motion disorders. You can override this with `respectMotionPreference={false}`.
 
 ## Browser Support
 

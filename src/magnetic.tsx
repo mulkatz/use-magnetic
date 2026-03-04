@@ -47,11 +47,14 @@ export function Magnetic<T extends ElementType = "div">({
 		onLeave,
 	});
 
-	const setRef = (el: HTMLElement | null) => {
-		(innerRef as MutableRefObject<HTMLElement | null>).current = el;
-		if (typeof ref === "function") ref(el);
-		else if (ref) (ref as MutableRefObject<HTMLElement | null>).current = el;
-	};
+	const setRef = useCallback(
+		(el: HTMLElement | null) => {
+			(innerRef as MutableRefObject<HTMLElement | null>).current = el;
+			if (typeof ref === "function") ref(el);
+			else if (ref) (ref as MutableRefObject<HTMLElement | null>).current = el;
+		},
+		[ref],
+	);
 
 	return (
 		<Tag ref={setRef} {...htmlProps}>

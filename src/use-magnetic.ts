@@ -111,7 +111,10 @@ export function useMagnetic(
 		const el = ref.current;
 		if (!el) return;
 
-		if (motionDisabled) return;
+		if (motionDisabled) {
+			el.style.transform = baseTransform.current;
+			return;
+		}
 
 		// Capture existing transform so we can compose rather than overwrite
 		const computed = getComputedStyle(el).transform;

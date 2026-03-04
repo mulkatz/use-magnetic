@@ -169,6 +169,15 @@ export function useMagnetic(
 				cancelAnimationFrame(rafId.current);
 				rafId.current = 0;
 			}
+			// Reset all internal state so Strict Mode re-mount starts clean
+			targetX.current = 0;
+			targetY.current = 0;
+			currentX.current = 0;
+			currentY.current = 0;
+			if (isActive.current) {
+				isActive.current = false;
+				setIsActiveState(false);
+			}
 			// Reset transform on cleanup
 			if (el) {
 				el.style.transform = "";

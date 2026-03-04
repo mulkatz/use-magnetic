@@ -20,8 +20,8 @@ export interface MagneticOptions {
 export interface MagneticState {
 	/** Whether the cursor is within range */
 	isActive: boolean;
-	/** Current x displacement in px */
+	/** X displacement in px at the last isActive transition */
 	x: number;
-	/** Current y displacement in px */
+	/** Y displacement in px at the last isActive transition */
 	y: number;
 }

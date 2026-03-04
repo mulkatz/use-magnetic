@@ -1,6 +1,6 @@
 {
 	"name": "use-magnetic",
-	"version": "0.0.1",
+	"version": "0.8.0",
 	"description": "React hook & components for magnetic hover interactions. Zero dependencies, SSR-safe, a11y-first.",
 	"type": "module",
 	"license": "MIT",

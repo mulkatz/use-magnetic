@@ -30,7 +30,7 @@ export function useMagnetic(
 		onLeave,
 	} = options;
 
-	const [state, setState] = useState<MagneticState>({ isActive: false, x: 0, y: 0 });
+	const [isActiveState, setIsActiveState] = useState(false);
 
 	const targetX = useRef(0);
 	const targetY = useRef(0);
@@ -38,16 +38,20 @@ export function useMagnetic(
 	const currentY = useRef(0);
 	const rafId = useRef<number>(0);
 	const isActive = useRef(false);
-	const wasActive = useRef(false);
 
 	const onEnterRef = useRef(onEnter);
 	const onLeaveRef = useRef(onLeave);
 	onEnterRef.current = onEnter;
 	onLeaveRef.current = onLeave;
 
+	// Store latest options in a ref so the animation loop always reads fresh values
+	const optionsRef = useRef({ strength, range, ease, maxDisplacement });
+	optionsRef.current = { strength, range, ease, maxDisplacement };
+
 	const animate = useCallback(() => {
-		currentX.current = lerp(currentX.current, targetX.current, ease);
-		currentY.current = lerp(currentY.current, targetY.current, ease);
+		const { ease: currentEase } = optionsRef.current;
+		currentX.current = lerp(currentX.current, targetX.current, currentEase);
+		currentY.current = lerp(currentY.current, targetY.current, currentEase);
 
 		// Snap to zero when close enough
 		if (
@@ -63,19 +67,13 @@ export function useMagnetic(
 			el.style.transform = `translate3d(${currentX.current}px, ${currentY.current}px, 0)`;
 		}
 
-		setState({
-			isActive: isActive.current,
-			x: currentX.current,
-			y: currentY.current,
-		});
-
 		// Continue animating if not at rest
 		if (currentX.current !== targetX.current || currentY.current !== targetY.current) {
 			rafId.current = requestAnimationFrame(animate);
 		} else {
 			rafId.current = 0;
 		}
-	}, [ease, ref]);
+	}, [ref]);
 
 	const startAnimation = useCallback(() => {
 		if (rafId.current === 0) {
@@ -100,22 +98,25 @@ export function useMagnetic(
 			const distY = e.clientY - centerY;
 			const distance = Math.sqrt(distX * distX + distY * distY);
 
-			if (distance < range) {
+			const { strength: s, range: r, maxDisplacement: md } = optionsRef.current;
+
+			if (distance < r) {
 				if (!isActive.current) {
 					isActive.current = true;
+					setIsActiveState(true);
 					onEnterRef.current?.();
 				}
-				wasActive.current = true;
 
-				const maxDist = maxDisplacement ?? range * strength;
-				const pullX = Math.min(Math.max(distX * strength, -maxDist), maxDist);
-				const pullY = Math.min(Math.max(distY * strength, -maxDist), maxDist);
+				const maxDist = md ?? r * s;
+				const pullX = Math.min(Math.max(distX * s, -maxDist), maxDist);
+				const pullY = Math.min(Math.max(distY * s, -maxDist), maxDist);
 
 				targetX.current = pullX;
 				targetY.current = pullY;
 			} else {
 				if (isActive.current) {
 					isActive.current = false;
+					setIsActiveState(false);
 					onLeaveRef.current?.();
 				}
 				targetX.current = 0;
@@ -128,6 +129,7 @@ export function useMagnetic(
 		const handlePointerLeave = () => {
 			if (isActive.current) {
 				isActive.current = false;
+				setIsActiveState(false);
 				onLeaveRef.current?.();
 			}
 			targetX.current = 0;
@@ -150,7 +152,11 @@ export function useMagnetic(
 				el.style.transform = "";
 			}
 		};
-	}, [ref, strength, range, maxDisplacement, respectMotionPreference, triggerArea, startAnimation]);
+	}, [ref, respectMotionPreference, triggerArea, startAnimation]);
 
-	return state;
+	return {
+		isActive: isActiveState,
+		x: currentX.current,
+		y: currentY.current,
+	};
 }

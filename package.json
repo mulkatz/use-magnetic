@@ -1,0 +1,52 @@
+{
+	"name": "magnetic-elements",
+	"version": "0.0.1",
+	"description": "React hook & components for magnetic hover interactions. Zero dependencies, SSR-safe, a11y-first.",
+	"type": "module",
+	"license": "MIT",
+	"author": "Franz Schlögel",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/franzs/magnetic-elements"
+	},
+	"keywords": [
+		"magnetic",
+		"hover",
+		"cursor",
+		"attraction",
+		"react",
+		"hook",
+		"animation",
+		"interaction",
+		"ui",
+		"awwwards"
+	],
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		}
+	},
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"files": ["dist"],
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"check": "biome check .",
+		"check:fix": "biome check --write .",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"prepublishOnly": "npm run build"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.0",
+		"@types/react": "^19.0.0",
+		"tsup": "^8.3.0",
+		"typescript": "^5.7.0",
+		"vitest": "^3.0.0"
+	},
+	"peerDependencies": {
+		"react": ">=18.0.0"
+	}
+}

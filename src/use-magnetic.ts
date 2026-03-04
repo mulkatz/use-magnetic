@@ -60,6 +60,7 @@ export function useMagnetic(
 	const currentY = useRef(0);
 	const rafId = useRef<number>(0);
 	const isActive = useRef(false);
+	const baseTransform = useRef("");
 
 	const onEnterRef = useRef(onEnter);
 	const onLeaveRef = useRef(onLeave);
@@ -86,7 +87,10 @@ export function useMagnetic(
 
 		const el = ref.current;
 		if (el) {
-			el.style.transform = `translate3d(${currentX.current}px, ${currentY.current}px, 0)`;
+			const magnetic = `translate3d(${currentX.current}px, ${currentY.current}px, 0)`;
+			el.style.transform = baseTransform.current
+				? `${magnetic} ${baseTransform.current}`
+				: magnetic;
 		}
 
 		// Continue animating if not at rest
@@ -108,6 +112,10 @@ export function useMagnetic(
 		if (!el) return;
 
 		if (motionDisabled) return;
+
+		// Capture existing transform so we can compose rather than overwrite
+		const computed = getComputedStyle(el).transform;
+		baseTransform.current = computed === "none" ? "" : computed;
 
 		const triggerEl = triggerArea === "parent" ? (el.parentElement ?? el) : el;
 
@@ -182,10 +190,11 @@ export function useMagnetic(
 				isActive.current = false;
 				setIsActiveState(false);
 			}
-			// Reset transform on cleanup
+			// Restore original transform on cleanup
 			if (el) {
-				el.style.transform = "";
+				el.style.transform = baseTransform.current;
 			}
+			baseTransform.current = "";
 		};
 	}, [ref, motionDisabled, triggerArea, startAnimation]);
 

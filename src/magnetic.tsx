@@ -1,22 +1,24 @@
-import { type CSSProperties, type PropsWithChildren, type Ref, useRef } from "react";
+import {
+	type ComponentPropsWithoutRef,
+	type ElementType,
+	type PropsWithChildren,
+	type Ref,
+	useRef,
+} from "react";
 import type { MagneticOptions } from "./types.js";
 import { useMagnetic } from "./use-magnetic.js";
 
-export interface MagneticProps extends PropsWithChildren, MagneticOptions {
-	/** HTML tag to render. Default: 'div' */
-	as?: keyof HTMLElementTagNameMap;
-	/** Additional CSS class */
-	className?: string;
-	/** Additional inline styles */
-	style?: CSSProperties;
-	/** Ref to the underlying element */
-	ref?: Ref<HTMLElement>;
-}
+export type MagneticProps<T extends ElementType = "div"> = PropsWithChildren<
+	MagneticOptions & {
+		/** HTML tag to render. Default: 'div' */
+		as?: T;
+		/** Ref to the underlying element */
+		ref?: Ref<HTMLElement>;
+	} & Omit<ComponentPropsWithoutRef<T>, keyof MagneticOptions | "as" | "ref">
+>;
 
-export function Magnetic({
-	as: Tag = "div",
-	className,
-	style,
+export function Magnetic<T extends ElementType = "div">({
+	as,
 	children,
 	ref,
 	strength,
@@ -27,7 +29,9 @@ export function Magnetic({
 	triggerArea,
 	onEnter,
 	onLeave,
-}: MagneticProps) {
+	...htmlProps
+}: MagneticProps<T>) {
+	const Tag = as ?? "div";
 	const innerRef = useRef<HTMLElement>(null);
 
 	useMagnetic(innerRef, {
@@ -48,8 +52,7 @@ export function Magnetic({
 	};
 
 	return (
-		// @ts-expect-error — dynamic tag with ref
-		<Tag ref={setRef} className={className} style={style}>
+		<Tag ref={setRef} {...htmlProps}>
 			{children}
 		</Tag>
 	);

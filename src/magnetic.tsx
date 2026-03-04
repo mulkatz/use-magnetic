@@ -1,8 +1,10 @@
 import {
 	type ComponentPropsWithoutRef,
 	type ElementType,
+	type MutableRefObject,
 	type PropsWithChildren,
 	type Ref,
+	useCallback,
 	useRef,
 } from "react";
 import type { MagneticOptions } from "./types.js";
@@ -46,9 +48,9 @@ export function Magnetic<T extends ElementType = "div">({
 	});
 
 	const setRef = (el: HTMLElement | null) => {
-		(innerRef as React.MutableRefObject<HTMLElement | null>).current = el;
+		(innerRef as MutableRefObject<HTMLElement | null>).current = el;
 		if (typeof ref === "function") ref(el);
-		else if (ref) (ref as React.MutableRefObject<HTMLElement | null>).current = el;
+		else if (ref) (ref as MutableRefObject<HTMLElement | null>).current = el;
 	};
 
 	return (

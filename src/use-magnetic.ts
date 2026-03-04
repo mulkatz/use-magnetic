@@ -113,6 +113,10 @@ export function useMagnetic(
 
 		const handlePointerMove = (e: PointerEvent) => {
 			const rect = el.getBoundingClientRect();
+
+			// Guard: skip if element has zero dimensions (collapsed, hidden, etc.)
+			if (rect.width === 0 || rect.height === 0) return;
+
 			const centerX = rect.left + rect.width / 2;
 			const centerY = rect.top + rect.height / 2;
 

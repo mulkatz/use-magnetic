@@ -5,13 +5,13 @@
 	"type": "module",
 	"license": "MIT",
 	"author": "Franz Schlögel",
-	"homepage": "https://github.com/franzs/use-magnetic#readme",
+	"homepage": "https://github.com/mulkatz/use-magnetic#readme",
 	"bugs": {
-		"url": "https://github.com/franzs/use-magnetic/issues"
+		"url": "https://github.com/mulkatz/use-magnetic/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/franzs/use-magnetic"
+		"url": "https://github.com/mulkatz/use-magnetic"
 	},
 	"keywords": [
 		"magnetic",

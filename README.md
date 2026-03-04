@@ -2,8 +2,6 @@
 
 React hook & components for magnetic hover interactions. Elements that attract toward the cursor — like on Apple.com and Awwwards sites.
 
-<!-- TODO: Add GIF demo here -->
-
 ## Features
 
 - **`useMagnetic` hook** — full control, works with any element
@@ -11,7 +9,7 @@ React hook & components for magnetic hover interactions. Elements that attract t
 - **Accessibility-first** — respects `prefers-reduced-motion` by default
 - **SSR-safe** — no DOM access until hydration, works with Next.js App Router
 - **Zero dependencies** — just React as peer dependency
-- **Tiny** — ~1KB gzipped
+- **Tiny** — ~1.3KB gzipped
 
 ## Install
 

@@ -1,6 +1,22 @@
-# use-magnetic
+<p align="center"><img src="./icon.png" width="120" /></p>
 
+<h1 align="center">use-magnetic</h1>
+
+<p align="center">
 React hook & components for magnetic hover interactions. Elements that attract toward the cursor — like on Apple.com and Awwwards sites.
+</p>
+
+<p align="center">
+<a href="https://www.npmjs.com/package/use-magnetic"><img src="https://img.shields.io/npm/v/use-magnetic" alt="npm version" /></a>
+<img src="https://img.shields.io/bundlephobia/minzip/use-magnetic" alt="bundle size" />
+<img src="https://img.shields.io/npm/l/use-magnetic" alt="license" />
+</p>
+
+<p align="center"><img src="./assets/demo.gif" width="800" /></p>
+
+<p align="center">
+<a href="https://use-magnetic.mulkatz.dev"><strong>→ Live Demo</strong></a>
+</p>
 
 ## Features
 
@@ -22,15 +38,15 @@ npm install use-magnetic
 ### Hook
 
 ```tsx
-import { useMagnetic } from 'use-magnetic';
-import { useRef } from 'react';
+import { useMagnetic } from "use-magnetic";
+import { useRef } from "react";
 
 function MagneticButton() {
   const ref = useRef<HTMLButtonElement>(null);
   const { isActive } = useMagnetic(ref, { strength: 0.3 });
 
   return (
-    <button ref={ref} className={isActive ? 'active' : ''}>
+    <button ref={ref} className={isActive ? "active" : ""}>
       Hover me
     </button>
   );
@@ -40,7 +56,7 @@ function MagneticButton() {
 ### Component
 
 ```tsx
-import { Magnetic } from 'use-magnetic';
+import { Magnetic } from "use-magnetic";
 
 function App() {
   return (

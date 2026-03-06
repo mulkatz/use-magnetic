@@ -17,11 +17,8 @@ export function Strength() {
 			<h2 className="text-2xl font-semibold text-zinc-50 mb-3">Strength & Range</h2>
 			<p className="text-zinc-400 mb-10 max-w-xl">
 				Control how strongly elements attract and from how far away. Combine{" "}
-				<code className="text-zinc-300 bg-zinc-800 px-1.5 py-0.5 rounded text-sm">
-					strength
-				</code>{" "}
-				and{" "}
-				<code className="text-zinc-300 bg-zinc-800 px-1.5 py-0.5 rounded text-sm">range</code>{" "}
+				<code className="text-zinc-300 bg-zinc-800 px-1.5 py-0.5 rounded text-sm">strength</code>{" "}
+				and <code className="text-zinc-300 bg-zinc-800 px-1.5 py-0.5 rounded text-sm">range</code>{" "}
 				for different feels.
 			</p>
 

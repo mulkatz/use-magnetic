@@ -7,8 +7,8 @@ export function Grid() {
 		<section className="py-20">
 			<h2 className="text-2xl font-semibold text-zinc-50 mb-3">Grid of Elements</h2>
 			<p className="text-zinc-400 mb-10 max-w-xl">
-				Apply to any number of elements. Each tracks the cursor independently. Move your
-				cursor across the grid.
+				Apply to any number of elements. Each tracks the cursor independently. Move your cursor
+				across the grid.
 			</p>
 
 			<div className="grid grid-cols-4 sm:grid-cols-6 gap-4 max-w-lg mx-auto">

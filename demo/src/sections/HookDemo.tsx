@@ -19,10 +19,8 @@ export function HookDemo() {
 			<h2 className="text-2xl font-semibold text-zinc-50 mb-3">useMagnetic Hook</h2>
 			<p className="text-zinc-400 mb-10 max-w-xl">
 				Full control with the hook API. Access{" "}
-				<code className="text-zinc-300 bg-zinc-800 px-1.5 py-0.5 rounded text-sm">
-					isActive
-				</code>{" "}
-				to react to hover state — scale, glow, or animate however you want.
+				<code className="text-zinc-300 bg-zinc-800 px-1.5 py-0.5 rounded text-sm">isActive</code> to
+				react to hover state — scale, glow, or animate however you want.
 			</p>
 
 			<div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
@@ -44,9 +42,7 @@ export function HookDemo() {
 					<div
 						ref={ref2}
 						className={`w-20 h-20 mx-auto rounded-full border transition-all duration-200 flex items-center justify-center ${
-							active2
-								? "bg-zinc-800 border-zinc-500"
-								: "bg-zinc-900 border-zinc-800"
+							active2 ? "bg-zinc-800 border-zinc-500" : "bg-zinc-900 border-zinc-800"
 						}`}
 					>
 						<div
@@ -63,9 +59,7 @@ export function HookDemo() {
 						<div
 							ref={ref3}
 							className={`px-4 py-2 rounded-lg text-sm transition-all duration-200 ${
-								active3
-									? "bg-zinc-100 text-zinc-900"
-									: "bg-zinc-800 text-zinc-400"
+								active3 ? "bg-zinc-100 text-zinc-900" : "bg-zinc-800 text-zinc-400"
 							}`}
 						>
 							Parent trigger

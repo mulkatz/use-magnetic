@@ -8,7 +8,6 @@ React hook & components for magnetic hover interactions. Elements that attract t
 
 <p align="center">
 <a href="https://www.npmjs.com/package/use-magnetic"><img src="https://img.shields.io/npm/v/use-magnetic" alt="npm version" /></a>
-<img src="https://img.shields.io/bundlephobia/minzip/use-magnetic" alt="bundle size" />
 <img src="https://img.shields.io/npm/l/use-magnetic" alt="license" />
 </p>
 
